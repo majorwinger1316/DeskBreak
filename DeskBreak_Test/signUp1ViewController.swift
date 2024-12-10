@@ -19,29 +19,23 @@ class signUp1ViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var userDateOfBirth: UITextField!
     
     var registrationData = UserRegistrationData()
-    
-    // Date Picker
+
     private var datePicker: UIDatePicker = {
         let picker = UIDatePicker()
         picker.datePickerMode = .date
         picker.maximumDate = Calendar.current.date(byAdding: .year, value: -18, to: Date()) // User must be 18+
         picker.minimumDate = Calendar.current.date(byAdding: .year, value: -100, to: Date())
-        picker.preferredDatePickerStyle = .wheels // For a compact style, use .inline or .compact
+        picker.preferredDatePickerStyle = .wheels
         return picker
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDatePicker()
-
-        // Do any additional setup after loading the view.
     }
     
     private func setupDatePicker() {
-        // Set the input view of the dateOfBirth text field to the date picker
         userDateOfBirth.inputView = datePicker
-        
-        // Create a toolbar with a 'Done' button to close the date picker
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneDatePicker))
@@ -51,11 +45,9 @@ class signUp1ViewController: UIViewController, UIImagePickerControllerDelegate, 
 
     @objc private func doneDatePicker() {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium // Customize the format as needed
+        dateFormatter.dateStyle = .medium
         dateFormatter.dateFormat = "dd MMMM yyyy"
         userDateOfBirth.text = dateFormatter.string(from: datePicker.date)
-
-        // Close the date picker
         userDateOfBirth.resignFirstResponder()
     }
     
@@ -68,8 +60,6 @@ class signUp1ViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         registrationData.username = username
         registrationData.dateOfBirth = dateOfBirth
-        
-        // Navigate to the next screen with registration data
         if let nextVC = storyboard?.instantiateViewController(withIdentifier: "SignUpViewController2") as? signUp2ViewController {
             nextVC.registrationData = registrationData
             self.navigationController?.pushViewController(nextVC, animated: true)
@@ -83,7 +73,6 @@ class signUp1ViewController: UIViewController, UIImagePickerControllerDelegate, 
     present(imagePickerController, animated: true, completion: nil)
 }
 
-// Image picker delegate methods
 func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
     if let selectedImage = info[.editedImage] as? UIImage {
         userProfileImageView.image = selectedImage
@@ -98,8 +87,6 @@ func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMe
     picker.dismiss(animated: true, completion: nil)
 }
 
-
-    // Handle cancellation of image picker
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }

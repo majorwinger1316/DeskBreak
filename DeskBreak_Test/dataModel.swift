@@ -148,6 +148,14 @@ class User {
     }
 }
 
+struct Game {
+    let name: String
+    let description: String
+    let points: String
+    let photo: String
+    let time: String
+}
+
 // GameSession class for user sessions
 class GameSession {
     var sessionId: String

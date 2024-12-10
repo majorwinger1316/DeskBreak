@@ -1187,6 +1187,7 @@
                                     <color key="baseForegroundColor" name="textColor"/>
                                 </buttonConfiguration>
                                 <connections>
+                                    <action selector="doneButtonPressed:" destination="J3S-i5-EiM" eventType="touchUpInside" id="IoX-B7-PML"/>
                                     <segue destination="ju6-DN-k5f" kind="unwind" unwindAction="unwindToHomeWithSegue:" id="XmE-9E-cZK"/>
                                 </connections>
                             </button>
